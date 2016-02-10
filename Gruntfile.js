@@ -7,13 +7,13 @@ module.exports = function(grunt) {
         matchall: false,
         extensions: 'js',
         specNameMatcher: 'spec',
-        verbose: true,
+        // verbose: false,
         junitreport: {
-          report: false,
+          report: true,
           savePath: "./build/reports/jasmine/",
           useDotNotation: true,
           consolidate: true
-        },
+        }
       },
       // all: ['spec/']
       all: []
@@ -23,4 +23,5 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-jasmine-node');
 
   grunt.registerTask('test', 'jasmine_node');
+  grunt.registerTask('default', ['jasmine_node']);
 };

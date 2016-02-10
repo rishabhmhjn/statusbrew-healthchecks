@@ -11,6 +11,6 @@
   "dependencies": {
     "grunt": "^0.4.5",
     "grunt-jasmine-node": "git+https://github.com/rishabhmhjn/grunt-jasmine-node.git",
-    "request-promise": "^2.0.0"
+    "request": "^2.69.0"
   }
 }
