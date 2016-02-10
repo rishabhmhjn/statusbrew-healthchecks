@@ -1,5 +1,10 @@
 module.exports = function(grunt) {
+
+
   grunt.initConfig({
+    clean: {
+      build: './build'
+    },
     jasmine_node: {
       options: {
         forceExit: true,
@@ -7,7 +12,10 @@ module.exports = function(grunt) {
         matchall: false,
         extensions: 'js',
         specNameMatcher: 'spec',
-        // verbose: false,
+        specFolders: ['spec'],
+        isVerbose: false,
+        showColors: false,
+        includeStackTrace: false,
         junitreport: {
           report: true,
           savePath: "./build/reports/jasmine/",
@@ -15,13 +23,13 @@ module.exports = function(grunt) {
           consolidate: true
         }
       },
-      // all: ['spec/']
       all: []
     }
   });
 
   grunt.loadNpmTasks('grunt-jasmine-node');
+  grunt.loadNpmTasks('grunt-contrib-clean');
 
-  grunt.registerTask('test', 'jasmine_node');
-  grunt.registerTask('default', ['jasmine_node']);
+  grunt.registerTask('test', ['clean', 'jasmine_node']);
+  grunt.registerTask('default', ['test']);
 };

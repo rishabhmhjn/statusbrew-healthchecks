@@ -3,17 +3,6 @@
 var request = require('request');
 
 describe('statusbrew.com', () => {
-  it('should be online at www.statusbrew.com', done => {
-    request('https://www.statusbrew.com', (err, res, body) => {
-      expect(!err).toBe(true);
-      expect(res.statusCode).toBe(200);
-      expect(body).toContain('statusbrew');
-      expect(body).toContain('Unfollowers is now');
-      expect(body).toContain('me.unfollowers.droid');
-      done();
-    });
-  });
-
   it('should be online at statusbrew.com', done => {
     request('https://statusbrew.com', (err, res, body) => {
       expect(!err).toBe(true);
@@ -36,6 +25,20 @@ describe('statusbrew.com', () => {
       done();
     });
   }, 10000);
+});
+
+describe('www.statusbrew.com', () => {
+  it('should redirect to statusbrew.com', done => {
+    request({
+      followRedirect: false,
+      url: 'http://www.statusbrew.com'
+    }, (err, res, body) => {
+      expect(!err).toBe(true);
+      expect(res.statusCode).toBe(302);
+      expect(res.headers.location).toContain('http://statusbrew.com');
+      done();
+    });
+  });
 });
 
 describe('app.statusbrew.com', () => {
@@ -78,7 +81,7 @@ describe('guide.statusbrew.com', () => {
     request('http://guide.statusbrew.com', (err, res, body) => {
       expect(!err).toBe(true);
       expect(res.statusCode).toBe(200);
-      expect(body).toContain('Userguide');
+      expect(body).toContain('UserGuide');
       expect(body).toContain('me.unfollowers.droid');
       expect(body).toContain('Statusbrew');
       expect(body).not.toContain('admin-');
@@ -90,7 +93,7 @@ describe('guide.statusbrew.com', () => {
     request('https://guide.statusbrew.com', (err, res, body) => {
       expect(!err).toBe(true);
       expect(res.statusCode).toBe(200);
-      expect(body).toContain('Userguide');
+      expect(body).toContain('UserGuide');
       expect(body).toContain('me.unfollowers.droid');
       expect(body).toContain('Statusbrew');
       expect(body).not.toContain('admin-');
